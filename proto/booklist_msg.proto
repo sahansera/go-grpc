@@ -1,0 +1,10 @@
+syntax = "proto3";
+package sahansera.gogrpc;
+option go_package = "pb/";
+
+import "book_msg.proto";
+
+// Definition of a BookList
+message BookList {
+  repeated Book books = 1;
+}

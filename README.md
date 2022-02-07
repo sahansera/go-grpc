@@ -3,6 +3,7 @@
 ## Install
 
 Protobufs
+
 ```bash
 brew instal protobuf
 ```
@@ -10,11 +11,57 @@ brew instal protobuf
 Go plugins for the protobuf compiler or refer [here](https://grpc.io/docs/languages/go/quickstart/#prerequisites)
 
 ```bash
-go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
-go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
+make install
 ```
 
-## Compiling Protocs
+## Useful commands
+
+Generate Go stubs
+
 ```bash
-protoc --proto_path=proto proto/*.proto --go_out=.
+make gen
+```
+
+Clean stubs
+
+```bash
+make clean
+```
+
+## Issues and FAQ
+
+1. VS Code complains about imports?
+
+Known issue with the Proto3 VS Code plugin. Add the following to your `settings.json` file
+
+```
+"protoc": {
+        "path": "/path/to/protoc",
+        "compile_on_save": false,
+        "options": [
+            "--proto_path=protos/v3",
+            "--proto_path=protos/v2",
+            "--proto_path=${workspaceRoot}/proto",
+            "--proto_path=${env.GOPATH}/src",
+            "--java_out=gen/java"
+        ]
+    }
+```
+
+Run `which protoc` to find your proto compiler path.
+
+2. Auto formatter doesn't work?
+
+```bash
+brew install clang-format
+```
+
+Add the following to your settings.json
+
+```json
+{
+    ...
+    "editor.formatOnSave": true
+    ...
+}
 ```

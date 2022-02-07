@@ -1,5 +1,6 @@
-// Version of Protobufs
 syntax = "proto3";
+package sahansera.gogrpc;
+
 // Dir of generated .go files
 option go_package = "pb/";
 
