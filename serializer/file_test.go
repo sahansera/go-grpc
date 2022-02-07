@@ -17,10 +17,14 @@ func TestFile(t *testing.T) {
 		t.Fatalf("failed to write binary file: %v", err)
 	}
 
-	tmpBookList := &pb.BookList{}
-	ReadProtobufFromBinaryFile(binaryFile, tmpBookList)
+	tmpBookList := pb.BookList{}
+	err := ReadProtobufFromBinaryFile(binaryFile, &tmpBookList)
 
-	if tmpBookList == nil {
+	if err != nil {
+		t.Fatalf("failed to read binary file")
+	}
+
+	if tmpBookList.Books[0].Title != bookList1.Books[0].Title {
 		t.Fatalf("failed to read binary file")
 	}
 
