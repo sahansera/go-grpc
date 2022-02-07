@@ -1,5 +1,5 @@
 gen:
-	protoc --proto_path=proto proto/*.proto --go_out=.
+	protoc --proto_path=proto proto/*.proto --go_out=. --go-grpc_out=.
 
 clean:
 	rm -f pb/*.pb.go
@@ -12,8 +12,8 @@ install:
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
 	brew install protobuf
 	brew install clang-format
-	export PATH="$PATH:$(go env GOPATH)/bin"
+	export PATH=$PATH:$(go env GOPATH)/bin
 
 test:
 	rm -rf tmp && mkdir tmp
-	go test serializer/*.go
+	go test -cover -race serializer/*.go

@@ -1,0 +1,21 @@
+syntax = "proto3";
+package sahansera.gogrpc;
+option go_package = "pb/";
+
+import "booklist_msg.proto";
+import "google/api/annotations.proto";
+
+message GetBookListRequest {
+}
+
+message GetBookListResponse {
+  BookList book_list = 1;
+}
+
+service BookListService {
+  rpc GetBookList(GetBookListRequest) returns (GetBookListResponse) {
+    option (google.api.http) = {
+      get: "/booklist"
+    };
+  }
+}

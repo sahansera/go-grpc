@@ -2,6 +2,7 @@ package serializer
 
 import (
 	"main/mocks"
+	"main/pb"
 	"testing"
 )
 
@@ -14,5 +15,11 @@ func TestJson(t *testing.T) {
 	// Write the book list to a JSON file.
 	if err := WriteProtobufToJSONFile(jsonFile, bookList1); err != nil {
 		t.Fatalf("failed to write JSON file: %v", err)
+	}
+
+	tmpBookList := pb.BookList{}
+	err := JsonToProtobuf(jsonFile, &tmpBookList)
+	if err != nil {
+		t.Fatalf("failed to read JSON file")
 	}
 }
