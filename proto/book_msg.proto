@@ -1,0 +1,12 @@
+// Version of Protobufs
+syntax = "proto3";
+// Dir of generated .go files
+option go_package = "pb/";
+
+// Definition of a Book
+message Book {
+  string title = 1;
+  string author = 2;
+  int32 page_count = 3;
+  string language = 4;
+}
