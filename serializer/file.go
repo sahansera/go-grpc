@@ -20,3 +20,17 @@ func WriteProtobufToBinaryFile(filePath string, message proto.Message) error {
 
 	return nil
 }
+
+func ReadProtobufFromBinaryFile(filePath string, message proto.Message) error {
+	data, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		return fmt.Errorf("failed to read file: %v", err)
+	}
+
+	err = proto.Unmarshal(data, message)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal proto message: %v", err)
+	}
+
+	return nil
+}
