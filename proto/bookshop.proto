@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "server/pb";
+
+message Book {
+  string title = 1;
+  string author = 2;
+  int32 page_count = 3;
+  optional string language = 4;
+}
+
+message GetBookListRequest {}
+message GetBookListResponse { repeated Book books = 1; }
+
+service Inventory {
+  rpc GetBookList(GetBookListRequest) returns (GetBookListResponse) {}
+}

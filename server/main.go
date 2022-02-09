@@ -7,6 +7,7 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type server struct {
@@ -26,6 +27,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
+	reflection.Register(s)
 	pb.RegisterInventoryServer(s, &server{})
 	if err := s.Serve(listener); err != nil {
 		log.Fatalf("failed to serve: %v", err)
@@ -39,6 +41,11 @@ func getSampleBooks() []*pb.Book {
 			Author:    "Douglas Adams",
 			PageCount: 42,
 		},
+		{
+			Title:     "The Lord of the Rings",
+			Author: 	"J.R.R. Tolkien",
+			PageCount: 1234,
+		}
 	}
 	return sampleBooks
 }

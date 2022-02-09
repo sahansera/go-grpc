@@ -2,10 +2,10 @@ gen:
 	protoc --proto_path=proto proto/*.proto --go_out=. --go-grpc_out=.
 
 clean:
-	rm -f pb/*.pb.go
+	rm -f server/*.pb.go
 
-run:
-	go run main.go
+server:
+	go run server/main.go
 
 install:
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
