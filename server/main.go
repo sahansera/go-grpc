@@ -43,9 +43,9 @@ func getSampleBooks() []*pb.Book {
 		},
 		{
 			Title:     "The Lord of the Rings",
-			Author: 	"J.R.R. Tolkien",
+			Author:    "J.R.R. Tolkien",
 			PageCount: 1234,
-		}
+		},
 	}
 	return sampleBooks
 }
