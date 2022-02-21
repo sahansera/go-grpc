@@ -12,6 +12,7 @@ install:
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
 	brew install protobuf
 	brew install clang-format
+	brew install grpcurl
 	export PATH=$PATH:$(go env GOPATH)/bin
 
 test:

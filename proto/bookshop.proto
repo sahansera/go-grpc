@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "server/pb";
+option go_package = "pb/inventory";
 
 message Book {
   string title = 1;

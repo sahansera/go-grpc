@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bookshop/server/pb"
+	pb "bookshop/server/pb/inventory"
 	"context"
 	"log"
 	"net"

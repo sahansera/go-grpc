@@ -28,6 +28,14 @@ Clean stubs
 make clean
 ```
 
+## Invoking RPCs
+
+```bash
+# Note: since we are not using TLS all the calls are with -plaintext flag
+grpcurl -plaintext localhost:8080 list # introspect the service
+grpcurl -plaintext localhost:8080 Inventory.GetBookList # to get a list of books
+```
+
 ## Issues and FAQ
 
 1. VS Code complains about imports?
