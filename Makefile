@@ -1,8 +1,10 @@
 gen:
-	protoc --proto_path=proto proto/*.proto --go_out=. --go-grpc_out=.
+	protoc --proto_path=proto proto/*.proto --go_out=server --go-grpc_out=server
+	protoc --proto_path=proto proto/*.proto --go_out=client --go-grpc_out=client
 
 clean:
-	rm -f server/*.pb.go
+	rm -rf server/pb/
+	rm -rf client/pb/
 
 server:
 	go run server/main.go
