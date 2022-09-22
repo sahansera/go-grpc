@@ -39,7 +39,7 @@ Clean stubs
 make clean
 ```
 
-## Issues and FAQ
+## Common issues and FAQ ❓
 
 1. VS Code complains about imports?
 
@@ -71,8 +71,8 @@ Add the following to your settings.json
 
 ```json
 {
-    ...
+    // ...
     "editor.formatOnSave": true
-    ...
+    // ...
 }
 ```
