@@ -1,6 +1,8 @@
-# go-grpc
+# gRPC on Go
 
-## Install
+This projects you a start point for building a client and a server that communicates with gRPC. I also published a [blog article series](https://sahansera.dev/introduction-to-grpc/) if you are interested.
+
+## Install 🏗
 
 Protobufs
 
@@ -14,7 +16,16 @@ Go plugins for the protobuf compiler or refer [here](https://grpc.io/docs/langua
 make install
 ```
 
-## Useful commands
+## Invoking RPCs 🚀
+
+```bash
+# Note: since we are not using TLS all the calls are with -plaintext flag
+grpcurl -plaintext localhost:8080 list # introspect the service
+grpcurl -plaintext localhost:8080 Inventory.GetBookList # to get a list of books
+```
+
+
+## Useful commands 📡
 
 Generate Go stubs
 
@@ -26,14 +37,6 @@ Clean stubs
 
 ```bash
 make clean
-```
-
-## Invoking RPCs
-
-```bash
-# Note: since we are not using TLS all the calls are with -plaintext flag
-grpcurl -plaintext localhost:8080 list # introspect the service
-grpcurl -plaintext localhost:8080 Inventory.GetBookList # to get a list of books
 ```
 
 ## Issues and FAQ
