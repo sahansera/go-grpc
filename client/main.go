@@ -1,10 +1,13 @@
 package main
 
 import (
-	pb "bookshop/client/pb/inventory"
 	"context"
 	"log"
 
+	pb "bookshop/client/pb/inventory"
+	errors2 "bookshop/errors"
+
+	"github.com/cockroachdb/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -17,9 +20,14 @@ func main() {
 	defer conn.Close()
 
 	client := pb.NewInventoryClient(conn)
-	bookList, err := client.GetBookList(context.Background(), &pb.GetBookListRequest{})
+	_, err = client.GetBookList(context.Background(), &pb.GetBookListRequest{})
 	if err != nil {
-		log.Fatalf("failed to get book list: %v", err)
+		if errors.Is(err, errors2.ErrBookshop) {
+			log.Println("RECOGNIZED")
+		} else {
+			log.Println("NOT RECOGNIZED")
+		}
+		log.Printf("CAUSE: %v", errors.Cause(err))
 	}
-	log.Printf("book list: %v", bookList)
+	//log.Printf("book list: %v", bookList)
 }

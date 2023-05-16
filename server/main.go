@@ -1,13 +1,17 @@
 package main
 
 import (
-	pb "bookshop/server/pb/inventory"
 	"context"
 	"log"
 	"net"
 
+	errors2 "bookshop/errors"
+	pb "bookshop/server/pb/inventory"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+	"github.com/cockroachdb/errors"
 )
 
 type server struct {
@@ -15,10 +19,11 @@ type server struct {
 }
 
 func (s *server) GetBookList(ctx context.Context, in *pb.GetBookListRequest) (*pb.GetBookListResponse, error) {
-	log.Printf("Received request: %v", in.ProtoReflect().Descriptor().FullName())
-	return &pb.GetBookListResponse{
-		Books: getSampleBooks(),
-	}, nil
+	return nil, errors.Wrapf(errors.Wrapf(errors2.ErrBookshop, "second layer"), "third layer")
+	//log.Printf("Received request: %v", in.ProtoReflect().Descriptor().FullName())
+	//return &pb.GetBookListResponse{
+	//	Books: getSampleBooks(),
+	//}, nil
 }
 
 func main() {
