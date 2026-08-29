@@ -1,27 +1,48 @@
 # gRPC on Go
 
-This projects you a start point for building a client and a server that communicates with gRPC. I also published a [blog article series](https://sahansera.dev/introduction-to-grpc/) if you are interested.
+This project is a small starting point for building a Go client and server that communicate with gRPC. The accompanying [gRPC article series](https://sahansera.dev/introduction-to-grpc/) explains the contract, generated code, server, and client.
 
 ## Install 🏗
 
-Protobufs
+Install the Protocol Buffers compiler using the instructions for your platform. On macOS with Homebrew:
 
 ```bash
-brew instal protobuf
+brew install protobuf
 ```
 
-Go plugins for the protobuf compiler or refer [here](https://grpc.io/docs/languages/go/quickstart/#prerequisites)
+Install the Go plugins for the Protocol Buffers compiler. The [official gRPC-Go quick start](https://grpc.io/docs/languages/go/quickstart/#prerequisites) lists the same prerequisites.
 
 ```bash
 make install
 ```
 
+Generate the client and server bindings, then verify both modules:
+
+```bash
+make gen
+make test
+```
+
+Run the server:
+
+```bash
+make server
+```
+
+In another terminal, run the client:
+
+```bash
+make client
+```
+
+The sample uses plaintext transport only for local development. Configure TLS and authentication before exposing a gRPC service outside your trusted development network.
+
 ## Invoking RPCs 🚀
 
 ```bash
 # Note: since we are not using TLS all the calls are with -plaintext flag
-grpcurl -plaintext localhost:8080 list # introspect the service
-grpcurl -plaintext localhost:8080 Inventory.GetBookList # to get a list of books
+grpcurl -plaintext localhost:8080 list
+grpcurl -plaintext localhost:8080 Inventory.GetBookList
 ```
 
 
