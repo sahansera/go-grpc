@@ -1,3 +1,5 @@
+.PHONY: gen clean server client install test
+
 gen:
 	protoc --proto_path=proto proto/*.proto --go_out=server --go-grpc_out=server
 	protoc --proto_path=proto proto/*.proto --go_out=client --go-grpc_out=client
@@ -7,16 +9,16 @@ clean:
 	rm -rf client/pb/
 
 server:
-	go run server/main.go
+	go -C server run .
+
+client:
+	go -C client run .
 
 install:
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
-	brew install protobuf
-	brew install clang-format
-	brew install grpcurl
-	export PATH=$PATH:$(go env GOPATH)/bin
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+	@echo 'Add $$(go env GOPATH)/bin to your PATH if protoc cannot find the plugins.'
 
 test:
-	rm -rf tmp && mkdir tmp
-	go test -cover -race serializer/*.go
+	go -C server test ./...
+	go -C client test ./...
